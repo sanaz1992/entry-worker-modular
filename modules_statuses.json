@@ -1,0 +1,10 @@
+{
+    "User": true,
+    "Core": true,
+    "Jetstream": true,
+    "Dashboard": true,
+    "Media": true,
+    "ACL": true,
+    "Warehouse": true,
+    "Product": true
+}
