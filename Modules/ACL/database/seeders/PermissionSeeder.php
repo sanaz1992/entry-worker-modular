@@ -104,18 +104,7 @@ class PermissionSeeder extends Seeder
                 'name'  => 'categories_edit',
                 'title' => 'ویرایش گروهبندی محصولات',
             ],
-            [
-                'name'  => 'products_list',
-                'title' => 'لیست محصولات',
-            ],
-            [
-                'name'  => 'products_create',
-                'title' => 'ایجاد محصول',
-            ],
-            [
-                'name'  => 'products_edit',
-                'title' => 'ویرایش محصول',
-            ],
+
         ];
 
         foreach ($permissions as $permission) {

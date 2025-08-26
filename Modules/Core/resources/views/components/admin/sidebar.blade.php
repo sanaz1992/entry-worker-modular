@@ -20,31 +20,14 @@
             <!-- تب نمایندگان -->
             <a href="{{ route('admin.sellers.index') }}"
                 class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium 
-                                                                             {{request()->routeIs('admin.sellers.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
+                                                                                 {{request()->routeIs('admin.sellers.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
                 <img src="{{ asset('build/images/icons/sidebar/personalcard.svg') }}"
                     class="w-5 h-5 {{request()->routeIs('admin.sellers.index') ? 'invert' : ''}}" alt="نمایندگان" />
                 نمایندگان
             </a>
         @endcan
-        {{-- @can('categories_list')
-            <a href="{{route('admin.categories.index')}}"
-                class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium
-                                                     {{request()->routeIs('admin.categories.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
-                <img src="{{ asset('build/images/icons/sidebar/card-pos.svg') }}"
-                    class="w-5 h-5 {{request()->routeIs('admin.categories.index') ? 'invert' : ''}}"
-                    alt="گروهبندی محصولات" />
-                گروهبندی محصولات
-            </a>
-        @endcan --}}
-        @can('products_list')
-            <a href="{{route('admin.products.index')}}"
-                class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium
-                                                     {{request()->routeIs('admin.products.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
-                <img src="{{ asset('build/images/icons/sidebar/card-pos.svg') }}"
-                    class="w-5 h-5 {{request()->routeIs('admin.products.index') ? 'invert' : ''}}" alt="محصولات" />
-                محصولات
-            </a>
-        @endcan
+
+
         <!-- تب اطلاع‌رسانی‌ها -->
         <a href="#"
             class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium  {{request()->routeIs('admin.dashboard') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
@@ -64,7 +47,7 @@
         @can('admins_list')
             <a href="{{route('admin.admins.index')}}"
                 class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium
-                                                     {{request()->routeIs('admin.admins.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
+                                                         {{request()->routeIs('admin.admins.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
                 <img src="{{ asset('build/images/icons/sidebar/card-pos.svg') }}"
                     class="w-5 h-5 {{request()->routeIs('admin.admins.index') ? 'invert' : ''}}" alt=" کاربران" />
                 مدیران
@@ -73,7 +56,7 @@
         @can('roles_list')
             <a href="{{route('admin.roles.index')}}"
                 class="flex items-center gap-2 px-3 py-3 rounded-xl transition font-medium
-                                                 {{request()->routeIs('admin.roles.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
+                                                     {{request()->routeIs('admin.roles.index') ? 'bg-[#3E3E3B] text-white' : 'text-black hover:bg-gray-100'}}">
                 <img src="{{ asset('build/images/icons/sidebar/card-pos.svg') }}"
                     class="w-5 h-5 {{request()->routeIs('admin.roles.index') ? 'invert' : ''}}" alt=" دسترسی ها" />
                 دسترسی ها

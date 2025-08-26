@@ -4,7 +4,5 @@
     "Jetstream": true,
     "Dashboard": true,
     "Media": true,
-    "ACL": true,
-    "Warehouse": true,
-    "Product": true
+    "ACL": true
 }
