@@ -131,9 +131,9 @@ class PermissionSeeder extends Seeder
         $user = User::firstOrCreate(
             ['mobile' => '09358364707'],
             [
-                'name'     => 'sanaz',
+                'fname'     => 'sanaz',
+                'lname'     => 'keyvanloo',
                 'password' => Hash::make('12345678'),
-                'level'    => 'admin',
             ]
         );
         $user->assignRole($role);

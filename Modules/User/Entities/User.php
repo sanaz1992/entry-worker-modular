@@ -12,13 +12,16 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles, SoftDeletes;
+    use Notifiable;
+    use HasRoles;
+    use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'fname',
+        'lname',
         'mobile',
+        'email',
         'password',
-        'level',
     ];
 
     protected $hidden = [
