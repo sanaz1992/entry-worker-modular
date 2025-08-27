@@ -22,6 +22,7 @@ class User extends Authenticatable
         'mobile',
         'email',
         'password',
+        'level'
     ];
 
     protected $hidden = [
@@ -36,6 +37,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->fname . ' ' . $this->lname;
+    }
     public function uploadDir(): string
     {
         return 'uploads/users/' . $this->id;

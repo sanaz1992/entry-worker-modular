@@ -20,6 +20,7 @@ return new class () extends Migration {
             $table->string('mobile')->unique();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->string('password');
+            $table->enum('level', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

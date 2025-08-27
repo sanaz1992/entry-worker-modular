@@ -134,6 +134,7 @@ class PermissionSeeder extends Seeder
                 'fname'     => 'sanaz',
                 'lname'     => 'keyvanloo',
                 'password' => Hash::make('12345678'),
+                'level' => 'admin'
             ]
         );
         $user->assignRole($role);
