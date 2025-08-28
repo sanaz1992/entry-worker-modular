@@ -1,60 +1,62 @@
 <x-guest-layout>
-    <x-jetstream::authentication-card>
-        <x-slot name="logo">
-            <x-jetstream::authentication-card-logo />
-        </x-slot>
-
-        <x-jetstream::validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <div>
-                <x-jetstream::label for="name" value="{{ __('Name') }}" />
-                <x-jetstream::input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h4>{{__('jetstream::attributes.register')}}</h4>
             </div>
-
-            <div class="mt-4">
-                <x-jetstream::label for="mobile" value="{{ __('Mobile') }}" />
-                <x-jetstream::input id="mobile" class="block mt-1 w-full" type="text" name="mobile" :value="old('mobile')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-jetstream::label for="password" value="{{ __('Password') }}" />
-                <x-jetstream::input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-jetstream::label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-jetstream::input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-jetstream::label for="terms">
-                        <div class="flex items-center">
-                            <x-jetstream::checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
+            <div class="card-body">
+                <form method="POST" action="{{route('register')}}">
+                    @csrf
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="fname">{{__('jetstream::attributes.fname')}}</label>
+                            <input id="fname" type="text" class="form-control" name="fname" value="{{old('fname')}}">
+                            @error('fname')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
-                    </x-jetstream::label>
-                </div>
-            @endif
+                        <div class="form-group col-6">
+                            <label for="lname">{{__('jetstream::attributes.lname')}}</label>
+                            <input id="lname" type="text" class="form-control" name="lname" value="{{old('lname')}}">
+                            @error('lname')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">{{__('jetstream::attributes.mobile')}}</label>
+                        <input id="mobile" type="text" class="form-control" name="mobile" value="{{old('mobile')}}">
+                        @error('mobile')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="password" class="d-block">{{__('jetstream::attributes.password')}}</label>
+                            <input id="password" type="password" class="form-control pwstrength"
+                                data-indicator="pwindicator" name="password">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="password2"
+                                class="d-block">{{__('jetstream::attributes.password_confirm')}}</label>
+                            <input id="password2" type="password" class="form-control" name="password_confirmation">
+                        </div>
+                    </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-jetstream::button class="ms-4">
-                    {{ __('Register') }}
-                </x-jetstream::button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            {{__('jetstream::attributes.register')}}
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </x-jetstream::authentication-card>
+            <div class="mb-4 text-muted text-center">
+                {{__('jetstream::messages.you_have_account')}}
+                <a href="{{route('login')}}">{{__('jetstream::attributes.login')}}</a>
+            </div>
+        </div>
+    </div>
 </x-guest-layout>

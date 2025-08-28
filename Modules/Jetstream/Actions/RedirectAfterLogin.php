@@ -13,8 +13,8 @@ class RedirectAfterLogin implements LoginResponseContract
 
         if ($user->level === 'admin') {
             return redirect()->route('admin.dashboard');
-        } elseif ($user->level === 'saller') {
-            return redirect()->route('saller.dashboard');
+        } elseif ($user->level === 'user') {
+            return redirect()->route('user.dashboard');
         }
 
         return redirect()->route('home');
