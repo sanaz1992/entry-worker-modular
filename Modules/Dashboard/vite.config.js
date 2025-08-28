@@ -15,13 +15,13 @@ export default defineConfig({
             publicDirectory: '../../public',
             buildDirectory: 'build-dashboard',
             input: [
-                __dirname + '/resources/assets/css/app.min.css',
-                __dirname + '/resources/assets/css/style.css',
-                __dirname + '/resources/assets/css/components.css',
-                __dirname + '/resources/assets/css/custom.css',
-                __dirname + '/resources/assets/js/app.min.js',
-                __dirname + '/resources/assets/js/scripts.js',
-                __dirname + '/resources/assets/js/custom.js'
+                // __dirname + '/resources/assets/css/app.min.css',
+                // __dirname + '/resources/assets/css/style.css',
+                // __dirname + '/resources/assets/css/components.css',
+                // __dirname + '/resources/assets/css/custom.css',
+                // __dirname + '/resources/assets/js/app.min.js',
+                // __dirname + '/resources/assets/js/scripts.js',
+                // __dirname + '/resources/assets/js/custom.js'
             ],
             refresh: true,
         }),

@@ -62,14 +62,11 @@ class DashboardServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/'.$this->nameLower);
+        $userLangPath = module_path($this->name, 'Resources/lang');
 
-        if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->nameLower);
-            $this->loadJsonTranslationsFrom($langPath);
-        } else {
-            $this->loadTranslationsFrom(module_path($this->name, 'lang'), $this->nameLower);
-            $this->loadJsonTranslationsFrom(module_path($this->name, 'lang'));
+        if (is_dir($userLangPath)) {
+            $this->loadTranslationsFrom($userLangPath, $this->nameLower);
+            $this->loadJsonTranslationsFrom($userLangPath);
         }
     }
 
