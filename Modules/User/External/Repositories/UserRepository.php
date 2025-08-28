@@ -17,20 +17,23 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function create(array $data): User
     {
         return User::create([
-            'name'     => $data['name'],
-            'mobile'   => $data['mobile'],
+            'fname'        => $data['fname'],
+            'lname' => $data['lname'],
+            'mobile' => $data['mobile'],
+            'email'         => $data['email'] ?? null,
             'password' => Hash::make($data['password']),
-            'level'    => $data['level'],
+            'level'    => $data['level'] ?? 'user',
         ]);
     }
 
     public function update(User $user, array $data): User
     {
-        $user->name = $data['name'];
-        if (isset($data['password']) && strlen($data['password'])) {
-            $user->password = Hash::make($data['password']);
-        }
-        $user->save();
+        $user->update([
+            'fname' => $data['fname'],
+            'lname'  => $data['lname'],
+            'mobile'  => $data['mobile'],
+            'email'  => $data['email'] ?? null,
+        ]);
         return $user;
     }
 }

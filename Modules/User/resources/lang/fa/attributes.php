@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'users_list' => 'لیست کاربران',
+    'users_create' => 'افزودن کاربر',
+    'users_edit' => 'ویرایش کاربر',
+    'users_show' => 'مشاهده کاربر',
+    'avatar' => 'تصویر پروفایل',
+    'submit' => 'ثبت',
+
     'user' => 'کاربر',
     'admin' => 'مدیر',
     'admins_list' => 'لیست مدیران',
@@ -14,6 +21,10 @@ return [
     'actions' => 'عملیات',
     'permissions' => 'دسترسی ها',
     'level' => 'سطح دسترسی',
+    'fname' => 'نام',
+    'form.fname' => 'نام',
+    'lname' => 'نام خانوادگی',
+    'form.lname' => 'نام خانوادگی',
     'name' => 'نام و نام خانوادگی',
     'form.name' => 'نام و نام خانوادگی',
     'form.email' => 'ایمیل',
@@ -28,6 +39,7 @@ return [
     'mobile' => 'شماره همراه',
     'password_confirmation' => 'تاییدیه رمز عبور',
     'form.password_confirmation' => 'تاییدیه رمز عبور',
+    'created_at' => 'تاریخ عضویت',
     'province' => 'استان',
     'city' => 'شهر',
     'avatar' => 'عکس پروفایل',

@@ -10,14 +10,14 @@ use Modules\User\External\Repositories\Contract\UserRepositoryInterface;
 
 class UserService
 {
-
     public function __construct(
         protected UserRepositoryInterface $userRepository,
         protected MediaService $mediaService,
         protected AddressRepositoryInterface $addressRepository
-    ) {}
+    ) {
+    }
 
-    public function list(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
+    public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
         return $this->userRepository->all($orderBy, $limit, $with, $conditions);
     }
@@ -29,8 +29,6 @@ class UserService
         return DB::transaction(function () use ($data, $image) {
             $user = $this->userRepository->create($data);
             $data['user_id'] = $user->id;
-            $data['type'] = 'user-address';
-            $this->addressRepository->create($data);
             if ($image) {
                 $dir =  $user->uploadDir();
                 $this->mediaService->upload($user, $image, 'avatar', $dir);
@@ -45,8 +43,6 @@ class UserService
         unset($data['image']);
         return DB::transaction(function () use ($user, $data, $image) {
             $user = $this->userRepository->update($user, $data);
-            $address = $user->addresses()->first();
-            $this->addressRepository->update($address, $data);
             if ($image) {
                 $oldImage      = $user->medias()->first();
                 $dir =  $user->uploadDir();

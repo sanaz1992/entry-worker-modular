@@ -11,32 +11,30 @@ use Modules\User\Services\UserService;
 class UserCreate extends AdminDashboardBaseComponent
 {
     use WithFileUploads;
-    use Authorizable;
-    public $message;
+
     public $form = [
-        'name'     => '',
-        'mobile'   => '',
-        'password' => '',
-        'level'    => '',
-        'image'    => null,
+        'fname' => '',
+        'lname' => '',
+        'email' => '',
+        'mobile' => '',
+        'image' => null,
     ];
+    public $message;
 
-    public function mount()
-    {
-        $this->authorize('users_create');
-    }
 
-    public function store(UserService $userService)
+    public function save(UserService $userService)
     {
-        $this->validate(StoreUserRules::rules(), trans('user::validation'), trans('user::attributes'));
+        $this->validate(StoreUserRules::rules());
+
         $userService->create($this->form);
-        $this->message = __('user::messages.user_created_successfully');
+        $this->message = __('core::messages.create.success');
         $this->reset('form');
     }
-    public function render(UserService $userService)
+    public function render()
     {
-        $users = $userService->list(null, [10, true]);
-
-        return $this->renderView('user::livewire.user.user-create', compact('users'));
+        return $this->renderView('user::livewire.user.user-create')
+            ->layoutData([
+                'title' => __('user::attributes.users_create')
+            ]);
     }
 }

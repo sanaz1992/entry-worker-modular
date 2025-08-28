@@ -1,79 +1,101 @@
-<div class="p-6 bg-white">
-
-    <h2 class="text-2xl font-bold mb-4">{{ __('user::attributes.create') }}</h2>
-
-    @if (session()->has('message'))
-        <div class="mb-4 text-green-600">{{ session('message') }}</div>
-    @endif
-    @if ($message)
-        <div class="mb-4 text-green-600">{{ $message }}</div>
-    @endif
-
-    <form wire:submit="store">
-        <div class="mb-4">
-            <label class="block mb-1 text-sm">{{ __('user::attributes.name') }}:</label>
-            <input type="text" wire:model.defer="form.name" class="border border-gray-300 rounded px-3 py-1 w-full" />
-            @error('form.name')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-sm">{{ __('user::attributes.avatar') }} :</label>
-            <input type="file" wire:model="form.image">
-            @error('form.image')
-                <span class="text-red-500">{{ $message }}</span>
-            @enderror
-
-            @if (isset($form['image']) && is_object($form['image']))
-                <img src="{{ $form['image']->temporaryUrl() }}" class="w-20 rounded mt-2">
-            @endif
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-sm">{{ __('user::attributes.mobile') }} : </label>
-            <input type="text" wire:model.defer="form.mobile" class="border border-gray-300 rounded px-3 py-1 w-full" />
-            @error('form.mobile')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-4">
-            <label class="block mb-1 text-sm">{{ __('user::attributes.password') }} : </label>
-            <input type="password" wire:model.defer="form.password"
-                class="border border-gray-300 rounded px-3 py-1 w-full" />
-            @error('form.password')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1 text-sm">{{ __('user::attributes.password_confirmation') }} : </label>
-            <input type="password" wire:model.defer="form.password_confirmation"
-                class="border border-gray-300 rounded px-3 py-1 w-full" />
-            @error('form.password_confirmation')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
-        </div>
-
-        <div class="mb-4">
-            <label class="block mb-1 text-sm font-medium">{{ __('user::attributes.level') }}:</label>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
-                @foreach (\Modules\User\Enums\UserLevel::cases() as $level)
-                    <label class="flex items-center" for="level_{{ $level->value }}">
-                        <input type="radio" wire:model="form.level" id="level_{{ $level->value }}"
-                            value="{{ $level->value }}" class="mr-2" />
-                        {{ $level->label() }}
-                    </label>
-                @endforeach
-
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>@lang('user::attributes.users_create') </h4>
+                    </div>
+                    @if ($message)
+                        <div class="alert alert-success mx-2">{{ $message }} </div>
+                    @endif
+                    <form wire:submit="save">
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.fname')</label>
+                                    <input type="text"
+                                        class="form-control  @error('form.fname') border-danger @enderror"
+                                        wire:model="form.fname" required>
+                                    @error('form.fname')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.lname')</label>
+                                    <input type="text"
+                                        class="form-control  @error('form.lname') border-danger @enderror"
+                                        wire:model="form.lname" required>
+                                    @error('form.lname')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.mobile')</label>
+                                    <input type="text"
+                                        class="form-control  @error('form.mobile') border-danger @enderror"
+                                        wire:model="form.mobile" required>
+                                    @error('form.mobile')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.email')</label>
+                                    <input type="text"
+                                        class="form-control  @error('form.email') border-danger @enderror"
+                                        wire:model="form.email">
+                                    @error('form.email')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.password')</label>
+                                    <input type="password"
+                                        class="form-control  @error('form.password') border-danger @enderror"
+                                        wire:model="form.password" required>
+                                    @error('form.password')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>@lang('user::attributes.password_confirmation')</label>
+                                    <input type="password"
+                                        class="form-control  @error('form.password_confirmation') border-danger @enderror"
+                                        wire:model="form.password_confirmation" required>
+                                    @error('form.password_confirmation')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>{{ __('user::attributes.avatar') }} :</label>
+                                    <input type="file" wire:model="form.image">
+                                    @error('form.image')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror
+                                    @if (isset($form['image']) && is_object($form['image']))
+                                        <img src="{{ $form['image']->temporaryUrl() }}" class="mr-3 rounded" width="100">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <button class="btn btn-primary mr-1" type="submit" >
+                                @lang('user::attributes.submit')
+                                <div wire:loading>
+                                    در حال ثبت اطلاعات
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            @error('form.level')
-                <span class="text-red-500 text-xs">{{ $message }}</span>
-            @enderror
         </div>
+    </div>
 
-        <div wire:loading wire:target="form.image">{{ __('core::messages.image.uploading') }}</div>
-        <button type="submit" wire:loading.attr="disabled" wire:target="form.image"
-            class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-700">
-            {{ __('user::attributes.store') }}
-        </button>
-    </form>
-</div>
+</section>

@@ -41,6 +41,11 @@ class User extends Authenticatable
     {
         return $this->fname . ' ' . $this->lname;
     }
+    public function getCreatedAtJalaliAttribute()
+    {
+        return verta($this->created_at)->format('Y/m/d H:i');
+    }
+
     public function uploadDir(): string
     {
         return 'uploads/users/' . $this->id;
@@ -54,10 +59,5 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         return $this->medias()->where('collection', 'avatar')->first();
-    }
-
-    public function addresses(): HasMany
-    {
-        return $this->hasMany(Address::class);
     }
 }
