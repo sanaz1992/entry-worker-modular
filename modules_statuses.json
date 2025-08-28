@@ -4,5 +4,6 @@
     "Jetstream": true,
     "Dashboard": true,
     "Media": true,
-    "ACL": true
+    "ACL": true,
+    "Company": true
 }

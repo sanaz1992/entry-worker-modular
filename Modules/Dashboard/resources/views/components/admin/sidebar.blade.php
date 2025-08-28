@@ -34,14 +34,18 @@
                         @lang('dashboard::attributes.companies')
                     </span>
                 </a>
-                {{-- <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{route('admin.companies.index')}}">
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{route('admin.companies.index')}}">
                             @lang('dashboard::attributes.companies_list')
-                        </a></li>
-                    <li><a class="nav-link" href="{{route('admin.companies.create')}}">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('admin.companies.create')}}">
                             @lang('dashboard::attributes.companies_create')
-                        </a></li>
-                </ul> --}}
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown">

@@ -1,34 +1,26 @@
 <?php
 
-namespace Modules\User\Providers;
+namespace Modules\Company\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use Modules\User\External\Repositories\AddressRepository;
-use Modules\User\External\Repositories\Contract\AddressRepositoryInterface;
-use Modules\User\External\Repositories\Contract\UserRepositoryInterface;
-use Modules\User\External\Repositories\UserRepository;
-use Modules\User\Http\Livewire\Admin\AdminCreate;
-use Modules\User\Http\Livewire\Admin\AdminEdit;
-use Modules\User\Http\Livewire\Admin\AdminList;
-use Modules\User\Http\Livewire\Seller\SellerCreate;
-use Modules\User\Http\Livewire\Seller\SellerEdit;
-use Modules\User\Http\Livewire\Seller\SellerList;
-use Modules\User\Http\Livewire\User\UserCreate;
-use Modules\User\Http\Livewire\User\UserEdit;
-use Modules\User\Http\Livewire\User\UserList;
+use Modules\Company\External\Repositories\CompanyRepository;
+use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
+use Modules\Company\Http\Livewire\Admin\CompanyCreate;
+use Modules\Company\Http\Livewire\Admin\CompanyEdit;
+use Modules\Company\Http\Livewire\Admin\CompanyList;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class UserServiceProvider extends ServiceProvider
+class CompanyServiceProvider extends ServiceProvider
 {
     use PathNamespace;
 
-    protected string $name = 'User';
+    protected string $name = 'Company';
 
-    protected string $nameLower = 'user';
+    protected string $nameLower = 'company';
 
     /**
      * Boot the application events.
@@ -43,10 +35,9 @@ class UserServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(module_path($this->name, 'database/migrations'));
 
 
-
-        Livewire::component('user::list', UserList::class);
-        Livewire::component('user::create', UserCreate::class);
-        Livewire::component('user::edit', UserEdit::class);
+        Livewire::component('company::list', CompanyList::class);
+        Livewire::component('company::create', CompanyCreate::class);
+        Livewire::component('company::edit', CompanyEdit::class);
     }
 
     /**
@@ -57,8 +48,7 @@ class UserServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
-        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
-        $this->app->bind(AddressRepositoryInterface::class, AddressRepository::class);
+        $this->app->bind(CompanyRepositoryInterface::class, CompanyRepository::class);
     }
 
     /**
