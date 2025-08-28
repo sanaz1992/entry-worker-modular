@@ -4,13 +4,14 @@ namespace Modules\User\Http\Livewire\Admin;
 
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Livewire\WithPagination;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Enums\UserLevel;
 use Modules\User\Services\UserService;
 
-class AdminList extends AdminBaseComponent
+class AdminList extends AdminDashboardBaseComponent
 {
-    use WithPagination, Authorizable;
+    use WithPagination;
+    use Authorizable;
 
     public $columns = [];
     public $rows = [];

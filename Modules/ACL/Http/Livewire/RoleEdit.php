@@ -8,9 +8,9 @@ use Modules\ACL\Entities\Role;
 use Modules\ACL\Rules\StoreRoleRules;
 use Modules\ACL\Rules\UpdateRoleRules;
 use Modules\ACL\Services\RoleService;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 
-class RoleEdit extends AdminBaseComponent
+class RoleEdit extends AdminDashboardBaseComponent
 {
     use AuthorizesRequests;
     public Role $role;
@@ -21,7 +21,7 @@ class RoleEdit extends AdminBaseComponent
 
     public $permissions;
     public $message;
-    public function mount(Role $role)
+    protected function mount(Role $role)
     {
         $this->authorize('roles_edit');
         $this->role                        = $role;

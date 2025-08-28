@@ -7,11 +7,11 @@ use Modules\ACL\Rules\UpdateUserRolesRules;
 use Modules\ACL\Services\PermissionService;
 use Modules\ACL\Services\RoleService;
 use Modules\ACL\Services\UserRoleService;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Entities\User;
 use Modules\User\Enums\UserLevel;
 
-class UserRolesEdit extends AdminBaseComponent
+class UserRolesEdit extends AdminDashboardBaseComponent
 {
     use AuthorizesRequests;
     public User $user;

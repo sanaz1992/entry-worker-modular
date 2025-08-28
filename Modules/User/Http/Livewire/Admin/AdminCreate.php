@@ -4,13 +4,14 @@ namespace Modules\User\Http\Livewire\Admin;
 
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Livewire\WithFileUploads;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Rules\StoreUserRules;
 use Modules\User\Services\UserService;
 
-class AdminCreate extends AdminBaseComponent
+class AdminCreate extends AdminDashboardBaseComponent
 {
-    use WithFileUploads, Authorizable;
+    use WithFileUploads;
+    use Authorizable;
     public $message;
     public $form = [
         'name'     => '',

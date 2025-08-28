@@ -4,7 +4,7 @@ namespace Modules\User\Http\Livewire\Seller;
 
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Livewire\WithFileUploads;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Entities\City;
 use Modules\User\Entities\Province;
 use Modules\User\Entities\State;
@@ -12,9 +12,10 @@ use Modules\User\Enums\UserLevel;
 use Modules\User\Rules\StoreUserRules;
 use Modules\User\Services\UserService;
 
-class SellerCreate extends AdminBaseComponent
+class SellerCreate extends AdminDashboardBaseComponent
 {
-    use WithFileUploads, Authorizable;
+    use WithFileUploads;
+    use Authorizable;
     public $message;
     public $form = [
         'name'     => '',

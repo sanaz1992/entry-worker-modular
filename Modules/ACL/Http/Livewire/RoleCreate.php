@@ -6,9 +6,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Modules\ACL\Entities\Permission;
 use Modules\ACL\Rules\StoreRoleRules;
 use Modules\ACL\Services\RoleService;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 
-class RoleCreate extends AdminBaseComponent
+class RoleCreate extends AdminDashboardBaseComponent
 {
     use AuthorizesRequests;
     public $permissions;

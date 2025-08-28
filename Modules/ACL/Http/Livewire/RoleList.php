@@ -5,12 +5,12 @@ namespace Modules\ACL\Http\Livewire;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\WithPagination;
 use Modules\ACL\Services\RoleService;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
-use Modules\User\Services\UserService;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 
-class RoleList extends AdminBaseComponent
+class RoleList extends AdminDashboardBaseComponent
 {
-    use AuthorizesRequests, WithPagination;
+    use AuthorizesRequests;
+    use WithPagination;
     public function mount()
     {
         $this->authorize('roles_list');

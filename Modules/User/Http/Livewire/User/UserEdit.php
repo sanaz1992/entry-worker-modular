@@ -4,15 +4,16 @@ namespace Modules\User\Http\Livewire\User;
 
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Livewire\WithFileUploads;
-use Modules\Core\Http\Livewire\Admin\AdminBaseComponent;
+use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Entities\User;
 use Modules\User\Rules\StoreUserRules;
 use Modules\User\Rules\UpdateUserRules;
 use Modules\User\Services\UserService;
 
-class UserEdit extends AdminBaseComponent
+class UserEdit extends AdminDashboardBaseComponent
 {
-    use WithFileUploads, Authorizable;
+    use WithFileUploads;
+    use Authorizable;
     public User $user;
     public $form = [
         'name'     => '',
