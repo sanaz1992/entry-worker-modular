@@ -3,6 +3,7 @@
 namespace Modules\Company\Http\Livewire\Admin;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Modules\Company\Entities\Company;
 use Modules\Company\Rules\StoreCompanyRules;
 use Modules\Company\Services\CompanyService;
@@ -11,14 +12,16 @@ use Modules\User\Services\UserService;
 
 class CompanyEdit extends AdminDashboardBaseComponent
 {
+    use WithFileUploads;
     public $users;
     public $form = [
         'title' => '',
-        'manager_id' => ''
+        'manager_id' => '',
+        'image' => null,
     ];
     public $message;
     public $company;
-    public function mount(UserService $userService, Company $company)
+    public function mount(Company $company, UserService $userService)
     {
         // $this->authorize('categories_edit');
         $this->company      = $company;
@@ -37,7 +40,7 @@ class CompanyEdit extends AdminDashboardBaseComponent
     {
         return $this->renderView('company::livewire.admin.company-edit')
             ->layoutData([
-                'title' => __('company::attributes.companies_edit')
+                'title' => __('company::attributes.companies_edit') . ' ' . $this->company->title
             ]);
     }
 }

@@ -11,7 +11,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
 
         Route::get('/companies', CompanyList::class)->name('companies.index');
-        Route::get('/companies/{user}/show', CompanyEdit::class)->name('companies.show');
+        Route::get('/companies/{company}/show', CompanyEdit::class)->name('companies.show');
         Route::get('/companies/create', CompanyCreate::class)->name('companies.create');
-        Route::get('/companies/{user}/edit', CompanyEdit::class)->name('companies.edit');
+        Route::get('/companies/{company}/edit', CompanyEdit::class)->name('companies.edit');
     });
