@@ -6,13 +6,15 @@ use Illuminate\Support\Facades\DB;
 use Modules\Company\Entities\Company;
 use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
 use Modules\Media\Services\MediaService;
+use Modules\User\Services\UserService;
 
 class CompanyService
 {
     public function __construct(
         protected CompanyRepositoryInterface $companyRepository,
         protected MediaService $mediaService
-    ) {}
+    ) {
+    }
 
     public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
@@ -57,5 +59,13 @@ class CompanyService
             $q->whereNull('parent_id');
         }, 'charts.children']);
         return $company->charts;
+    }
+
+    public function getEmployees(Company $company, UserService $userService)
+    {
+        // $conditions = [
+        //     'where' => ['warehouse_id' => ['=', $this->warehouse->id]],
+        // ];
+        // return $userService->all(null, [], [], $conditions);
     }
 }

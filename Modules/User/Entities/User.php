@@ -2,11 +2,13 @@
 
 namespace Modules\User\Entities;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Company\Entities\Chart;
 use Modules\Media\Entities\Media;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -59,5 +61,11 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         return $this->medias()->where('collection', 'avatar')->first();
+    }
+
+    public function charts(): BelongsToMany
+    {
+        return $this->belongsToMany(Chart::class, 'company_user')
+            ->withPivot('company_id')->withTimestamps();
     }
 }

@@ -12,6 +12,7 @@ use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
+use Modules\Company\Http\Livewire\Admin\CompanyEmployees;
 use Modules\Company\Http\Livewire\Admin\CompanyList;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
@@ -42,6 +43,7 @@ class CompanyServiceProvider extends ServiceProvider
         Livewire::component('company::create', CompanyCreate::class);
         Livewire::component('company::edit', CompanyEdit::class);
         Livewire::component('company::chart', CompanyChart::class);
+        Livewire::component('company::employees', CompanyEmployees::class);
     }
 
     /**

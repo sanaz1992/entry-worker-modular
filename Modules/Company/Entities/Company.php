@@ -50,6 +50,7 @@ class Company extends Model
 
     public function employees(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'company_user')
+            ->withPivot('chart_id');
     }
 }

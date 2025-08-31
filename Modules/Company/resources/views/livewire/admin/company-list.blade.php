@@ -43,11 +43,25 @@
                                             <td>{{$company->created_at_jalali}}</td>
                                             <td>
                                                 <a href="{{route('admin.companies.show', $company)}}"
-                                                    class="btn btn-icon btn-success"><i class="far fa-eye"></i></a>
+                                                    class="btn btn-icon btn-success"
+                                                    title="@lang('company::attributes.companies_show')">
+                                                    <i class="far fa-eye"></i>
+                                                </a>
                                                 <a href="{{route('admin.companies.edit', $company)}}"
-                                                    class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
+                                                    class="btn btn-icon btn-primary"
+                                                    title="@lang('company::attributes.companies_edit')">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
                                                 <a href="{{route('admin.companies.chart', $company)}}"
-                                                    class="btn btn-icon btn-info"><i class="fas fa-bars"></i></a>
+                                                    class="btn btn-icon btn-info"
+                                                    title="@lang('company::attributes.companies_chart')">
+                                                    <i class="fas fa-bars"></i>
+                                                </a>
+                                                <a href="{{route('admin.companies.employees.index', $company)}}"
+                                                    class="btn btn-icon btn-dark"
+                                                    title="@lang('company::attributes.company_employees')">
+                                                    <i class="fas fa-users"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
