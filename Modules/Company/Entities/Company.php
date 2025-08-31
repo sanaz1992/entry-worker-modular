@@ -3,8 +3,9 @@
 namespace Modules\Company\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Modules\Media\Entities\Media;
 use Modules\User\Entities\User;
@@ -18,6 +19,10 @@ class Company extends Model
     public function getCreatedAtJalaliAttribute()
     {
         return verta($this->created_at)->format('Y/m/d H:i');
+    }
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 
     public function uploadDir(): string
@@ -36,5 +41,15 @@ class Company extends Model
     public function manager(): BelongsTo
     {
         return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function charts(): HasMany
+    {
+        return $this->hasMany(Chart::class);
+    }
+
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
     }
 }

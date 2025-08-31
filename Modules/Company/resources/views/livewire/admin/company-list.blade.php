@@ -46,6 +46,8 @@
                                                     class="btn btn-icon btn-success"><i class="far fa-eye"></i></a>
                                                 <a href="{{route('admin.companies.edit', $company)}}"
                                                     class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
+                                                <a href="{{route('admin.companies.chart', $company)}}"
+                                                    class="btn btn-icon btn-info"><i class="fas fa-bars"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

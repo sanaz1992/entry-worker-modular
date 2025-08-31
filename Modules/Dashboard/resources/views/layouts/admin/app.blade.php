@@ -22,7 +22,7 @@
     ]) --}}
     <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/favicon.ico')}}' />
     @livewireStyles
-    @yield('stylesّ')
+    @stack('styles')
 </head>
 
 <body>
@@ -60,7 +60,7 @@
     ]) --}}
     @livewireScripts
 
-    @yield('scripts')
+    @stack('scripts')
 
 </body>
 

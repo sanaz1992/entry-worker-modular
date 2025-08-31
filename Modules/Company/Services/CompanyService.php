@@ -12,8 +12,7 @@ class CompanyService
     public function __construct(
         protected CompanyRepositoryInterface $companyRepository,
         protected MediaService $mediaService
-    ) {
-    }
+    ) {}
 
     public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
@@ -50,5 +49,13 @@ class CompanyService
             }
             return $company;
         });
+    }
+
+    public function getChart(Company $company)
+    {
+        $company->load(['charts' => function ($q) {
+            $q->whereNull('parent_id');
+        }, 'charts.children']);
+        return $company->charts;
     }
 }

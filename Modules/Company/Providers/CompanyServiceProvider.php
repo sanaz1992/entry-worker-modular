@@ -5,8 +5,11 @@ namespace Modules\Company\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Modules\Company\External\Repositories\ChartRepository;
 use Modules\Company\External\Repositories\CompanyRepository;
+use Modules\Company\External\Repositories\Contract\ChartRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
+use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
 use Modules\Company\Http\Livewire\Admin\CompanyList;
@@ -38,6 +41,7 @@ class CompanyServiceProvider extends ServiceProvider
         Livewire::component('company::list', CompanyList::class);
         Livewire::component('company::create', CompanyCreate::class);
         Livewire::component('company::edit', CompanyEdit::class);
+        Livewire::component('company::chart', CompanyChart::class);
     }
 
     /**
@@ -49,6 +53,7 @@ class CompanyServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
         $this->app->bind(CompanyRepositoryInterface::class, CompanyRepository::class);
+        $this->app->bind(ChartRepositoryInterface::class, ChartRepository::class);
     }
 
     /**
@@ -140,6 +145,11 @@ class CompanyServiceProvider extends ServiceProvider
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->nameLower);
 
         Blade::componentNamespace(config('modules.namespace') . '\\' . $this->name . '\\View\\Components', $this->nameLower);
+        // رجیستر کردن anonymous componentها
+        Blade::anonymousComponentNamespace(
+            module_path('Company', 'Resources/views/components'),
+            'company'
+        );
     }
 
     /**

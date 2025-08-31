@@ -7,6 +7,7 @@ return [
     'companies_create' => 'افزودن شرکت',
     'companies_edit' => 'ویرایش شرکت',
     'companies_show' => 'مشاهده شرکت',
+    'companies_chart' => 'چارت سازمانی شرکت',
     'company_name' => 'نام شرکت',
     'company_manager' => 'مدیر شرکت',
     'logo' => 'لوگو',
@@ -15,6 +16,8 @@ return [
     'actions' => 'عملیات',
     'submit' => 'ثبت',
     'created_at' => 'تاریخ ثبت',
+    'title' => 'عنوان',
+    'form.title' => 'عنوان',
 
 
 ];
