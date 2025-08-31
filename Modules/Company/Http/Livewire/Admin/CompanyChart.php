@@ -2,7 +2,6 @@
 
 namespace Modules\Company\Http\Livewire\Admin;
 
-
 use Modules\Company\Entities\Company;
 use Modules\Company\Rules\StoreChartNodeRules;
 use Modules\Company\Services\ChartService;
@@ -13,6 +12,7 @@ class CompanyChart extends AdminDashboardBaseComponent
 {
     public $showOptions  = false;
     public $showEditModal = false;
+    public $showNewNodeModal = false;
     public $message;
     public $company;
     public $charts;
@@ -48,10 +48,22 @@ class CompanyChart extends AdminDashboardBaseComponent
         $this->showOptionModal = true;
     }
 
+    public function closeNewNodeModal()
+    {
+        $this->showNewNodeModal = false;
+        $this->showOptionModal = true;
+    }
+
     public function editNode()
     {
         $this->showEditModal = true;
         $this->form['title'] = $this->selectedNodeTitle;
+    }
+
+    public function addNode()
+    {
+        $this->showNewNodeModal = true;
+        $this->form['title'] = '';
     }
 
     public $form = [
@@ -65,6 +77,17 @@ class CompanyChart extends AdminDashboardBaseComponent
         $this->message = __('core::messages.update.success');
         $this->charts = $companyService->getChart($this->company);
         $this->selectedNodeTitle = $this->form['title'];
+    }
+
+    public function createNewNode(ChartService $chartService, CompanyService $companyService)
+    {
+        $this->validate(StoreChartNodeRules::rules());
+        $this->form['company_id'] = $this->company->id;
+        $this->form['parent_id'] = $this->selectedNodeId;
+        $chartService->create($this->form);
+        $this->message = __('core::messages.update.success');
+        $this->charts = $companyService->getChart($this->company);
+        $this->closeNewNodeModal();
     }
     public function render()
     {

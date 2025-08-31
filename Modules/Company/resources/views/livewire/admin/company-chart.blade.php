@@ -88,6 +88,41 @@
             </div>
         </div>
     @endif
+
+    @if($showNewNodeModal)
+        <div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,.5)"
+            onclick=" window.Livewire.dispatch('closeNewNodeModal')">
+            <div class="modal-dialog modal-dialog-centered" onclick="event.stopPropagation()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>افزودن زیر شاخه به {{ $selectedNodeTitle }}</h5>
+                        <button type="button" class="far fa-window-close" wire:click="$set('showNewNodeModal', false)">
+                        </button>
+                    </div>
+                    <form wire:submit="createNewNode">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>@lang('company::attributes.title')</label>
+                                <input type="text" class="form-control  @error('form.title') border-danger @enderror"
+                                    wire:model="form.title">
+                                @error('form.title')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary mr-1" type="submit">
+                                @lang('company::attributes.submit')
+                                <div wire:loading>
+                                    در حال ثبت اطلاعات
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
 </section>
 
 @push('styles')
