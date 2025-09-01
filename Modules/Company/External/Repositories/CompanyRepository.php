@@ -31,4 +31,12 @@ class CompanyRepository extends BaseRepository implements CompanyRepositoryInter
         ]);
         return $company;
     }
+
+    public function addEmployee(Company $company, array $data): void
+    {
+        $company->employees()->attach(
+            $data['user_id'],
+            ['chart_id' => $data['chart_id']]
+        );
+    }
 }

@@ -20,6 +20,7 @@ return [
     'title' => 'عنوان',
     'form.title' => 'عنوان',
     'chart_title' => 'سمت',
+    'create_employee' => 'افزودن کارمند',
 
 
 ];

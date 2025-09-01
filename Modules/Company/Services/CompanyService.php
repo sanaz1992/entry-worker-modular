@@ -12,7 +12,8 @@ class CompanyService
 {
     public function __construct(
         protected CompanyRepositoryInterface $companyRepository,
-        protected MediaService $mediaService
+        protected MediaService $mediaService,
+        protected UserService $userService
     ) {
     }
 
@@ -67,5 +68,15 @@ class CompanyService
         //     'where' => ['warehouse_id' => ['=', $this->warehouse->id]],
         // ];
         // return $userService->all(null, [], [], $conditions);
+    }
+
+    public function createEmployee(Company $company, array $data)
+    {
+        $user = $this->userService->findByColumn('mobile', $data['mobile']);
+        if (!$user) {
+            $user = $this->userService->create($data);
+        }
+        $data['user_id'] = $user->id;
+        $this->companyRepository->addEmployee($company, $data);
     }
 }

@@ -9,4 +9,5 @@ interface CompanyRepositoryInterface extends BaseRepositoryInterface
 {
     public function create(array $data): Company;
     public function update(Company $company, array $data): Company;
+    public function addEmployee(Company $company, array $data): void;
 }

@@ -14,14 +14,20 @@ class UserService
         protected UserRepositoryInterface $userRepository,
         protected MediaService $mediaService,
         protected AddressRepositoryInterface $addressRepository
-    ) {
-    }
+    ) {}
 
     public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
         return $this->userRepository->all($orderBy, $limit, $with, $conditions);
     }
 
+    public function findByColumn($columnName, $value)
+    {
+        $conditions = [
+            'where' => [$columnName => ['=', $value]],
+        ];
+        return $this->userRepository->all(null, [], [], $conditions)->first();
+    }
     public function create(array $data): User
     {
         $image = $data['image'] ?? null;

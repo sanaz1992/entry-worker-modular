@@ -21,7 +21,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             'lname' => $data['lname'],
             'mobile' => $data['mobile'],
             'email'         => $data['email'] ?? null,
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['password'] ?? '12345678'),
             'level'    => $data['level'] ?? 'user',
         ]);
     }
