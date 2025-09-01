@@ -39,4 +39,9 @@ class CompanyRepository extends BaseRepository implements CompanyRepositoryInter
             ['chart_id' => $data['chart_id']]
         );
     }
+
+    public function deleteEmployee(Company $company, int $userId):void
+    {
+        $company->employees()->detach($userId);
+    }
 }

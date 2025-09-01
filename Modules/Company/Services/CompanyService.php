@@ -14,8 +14,7 @@ class CompanyService
         protected CompanyRepositoryInterface $companyRepository,
         protected MediaService $mediaService,
         protected UserService $userService
-    ) {
-    }
+    ) {}
 
     public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
@@ -78,5 +77,10 @@ class CompanyService
         }
         $data['user_id'] = $user->id;
         $this->companyRepository->addEmployee($company, $data);
+    }
+
+    public function deleteEmployee(Company $company, int $userId)
+    {
+        $this->companyRepository->deleteEmployee($company, $userId);
     }
 }

@@ -21,6 +21,7 @@ return [
     'form.title' => 'عنوان',
     'chart_title' => 'سمت',
     'create_employee' => 'افزودن کارمند',
+    'employees_delete'=>'حذف کارمند'
 
 
 ];

@@ -74,9 +74,21 @@ class CompanyEmployees extends AdminDashboardBaseComponent
 
         $this->company->load(['employees.charts' => function ($q) {
             $q->where('charts.company_id', $this->company->id);
-        }], 'charts');
+        }]);
         $this->employees = $this->company->employees;
         $this->reset('form');
+         $this->foundMobile = false;
+    }
+
+    public function deleteEmployee($value, CompanyService $companyService)
+    {
+        $companyService->deleteEmployee($this->company, $value);
+        $this->message = __('core::messages.delete.success');
+
+        $this->company->load(['employees.charts' => function ($q) {
+            $q->where('charts.company_id', $this->company->id);
+        }]);
+        $this->employees = $this->company->employees;
     }
 
     public function render()
