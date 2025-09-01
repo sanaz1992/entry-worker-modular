@@ -5,12 +5,15 @@ namespace Modules\Company\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\User\Entities\User;
 
 // use Modules\User\Database\Factories\AddressFactory;
 
 class Chart extends Model
 {
-    protected $fillable = ['title', 'company_id', 'parent_id'];
+    use SoftDeletes;
+    protected $fillable = ['title', 'company_id', 'parent_id', 'user_id', 'refrence_id'];
 
     public function getCreatedAtJalaliAttribute()
     {
@@ -29,5 +32,9 @@ class Chart extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -20,7 +20,6 @@ class CompanyEmployees extends AdminDashboardBaseComponent
         'mobile' => '',
         'chart_id' => '',
     ];
-    public $foundMobile = false;
     // public $fname;
     // public $lname;
     // public $chartId;
@@ -31,10 +30,8 @@ class CompanyEmployees extends AdminDashboardBaseComponent
     {
         // $this->authorize('categories_edit');
         $this->company      = $company;
-        $company->load(['employees.charts' => function ($q) use ($company) {
-            $q->where('charts.company_id', $company->id);
-        }], 'charts');
-        $this->employees = $company->employees;
+        $company->load('employees', 'charts');
+        $this->employees = $company->employees->unique();
         $this->charts = $company->charts;
     }
     protected $listeners = ['closeNewUserModal'];
@@ -49,46 +46,17 @@ class CompanyEmployees extends AdminDashboardBaseComponent
     }
 
 
-    public function updatedFormMobile($value, UserService $userService)
-    {
-        $this->validate([
-            'form.mobile' => ['required', 'regex:/^09[0-9]{9}$/'],
-        ]);
-        $user = $userService->findByColumn('mobile', $value);
-        if ($user) {
-            $this->form['fname'] = $user->fname;
-            $this->form['lname'] = $user->lname;
-            $this->foundMobile = true;
-        } else {
-            $this->foundMobile = false;
-            $this->form['fname'] = '';
-            $this->form['lname'] = '';
-        }
-    }
+   
 
-    public function createNewUser(CompanyService $companyService)
-    {
-        $this->validate(StoreCompanyEmployeeRules::rules());
-        $companyService->createEmployee($this->company, $this->form);
-        $this->message = __('core::messages.update.success');
-
-        $this->company->load(['employees.charts' => function ($q) {
-            $q->where('charts.company_id', $this->company->id);
-        }]);
-        $this->employees = $this->company->employees;
-        $this->reset('form');
-         $this->foundMobile = false;
-    }
+   
 
     public function deleteEmployee($value, CompanyService $companyService)
     {
         $companyService->deleteEmployee($this->company, $value);
         $this->message = __('core::messages.delete.success');
 
-        $this->company->load(['employees.charts' => function ($q) {
-            $q->where('charts.company_id', $this->company->id);
-        }]);
-        $this->employees = $this->company->employees;
+        $this->company->load('employees');
+        $this->employees = $this->company->employees->unique();
     }
 
     public function render()

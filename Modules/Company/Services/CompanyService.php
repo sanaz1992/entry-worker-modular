@@ -4,6 +4,8 @@ namespace Modules\Company\Services;
 
 use Illuminate\Support\Facades\DB;
 use Modules\Company\Entities\Company;
+use Modules\Company\External\Repositories\ChartRepository;
+use Modules\Company\External\Repositories\Contract\ChartRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
 use Modules\Media\Services\MediaService;
 use Modules\User\Services\UserService;
@@ -71,13 +73,7 @@ class CompanyService
 
     public function createEmployee(Company $company, array $data)
     {
-        $user = $this->userService->findByColumn('mobile', $data['mobile']);
-        if (!$user) {
-            $user = $this->userService->create($data);
         }
-        $data['user_id'] = $user->id;
-        $this->companyRepository->addEmployee($company, $data);
-    }
 
     public function deleteEmployee(Company $company, int $userId)
     {

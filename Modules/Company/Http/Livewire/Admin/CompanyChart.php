@@ -4,29 +4,43 @@ namespace Modules\Company\Http\Livewire\Admin;
 
 use Modules\Company\Entities\Company;
 use Modules\Company\Rules\StoreChartNodeRules;
+use Modules\Company\Rules\StoreCompanyEmployeeRules;
 use Modules\Company\Services\ChartService;
 use Modules\Company\Services\CompanyService;
 use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
+use Modules\User\Services\UserService;
 
 class CompanyChart extends AdminDashboardBaseComponent
 {
     public $showOptions  = false;
     public $showEditModal = false;
     public $showNewNodeModal = false;
+    public $showEmployeeModal = false;
     public $message;
     public $company;
     public $charts;
     public $showOptionModal = false;
     public $selectedNodeId;
     public $selectedNodeTitle;
-    public function mount(Company $company, CompanyService $companyService)
+    public $form = [
+        'title' => '',
+        'fname' => '',
+        'lname' => '',
+        'mobile' => '',
+        'chart_id' => '',
+    ];
+    public function mount(Company $company)
     {
         // $this->authorize('categories_edit');
         $this->company      = $company;
-        $this->charts = $companyService->getChart($company);
+        $this->loadChart();
+    }
+    public function loadChart()
+    {
+        $this->charts = resolve(CompanyService::class)->getChart($this->company);
     }
 
-    protected $listeners = ['openNodeOptionModal', 'closeNodeOptionModal'];
+    protected $listeners = ['openNodeOptionModal', 'closeNodeOptionModal', 'closeEmployeeModal'];
     public function openNodeOptionModal($id, ChartService $chartService)
     {
         $this->selectedNodeId = $id;
@@ -66,16 +80,53 @@ class CompanyChart extends AdminDashboardBaseComponent
         $this->form['title'] = '';
     }
 
-    public $form = [
-        'title' => '',
-    ];
+    public function editEmployee()
+    {
+        $this->showEmployeeModal = true;
+    }
+
+    public function closeEmployeeModal()
+    {
+        $this->showEmployeeModal = false;
+    }
+    public $foundMobile = false;
+
+    public function updatedFormMobile($value, UserService $userService)
+    {
+        $this->validate([
+            'form.mobile' => ['required', 'regex:/^09[0-9]{9}$/'],
+        ]);
+        $user = $userService->findByColumn('mobile', $value);
+        if ($user) {
+            $this->form['fname'] = $user->fname;
+            $this->form['lname'] = $user->lname;
+            $this->foundMobile = true;
+        } else {
+            $this->foundMobile = false;
+            $this->form['fname'] = '';
+            $this->form['lname'] = '';
+        }
+    }
+    public function createNewUser(ChartService $chartService)
+    {
+        $this->validate(StoreCompanyEmployeeRules::rules());
+        $chart =  $chartService->addUserToChart($this->selectedNodeId, $this->form);
+        $this->message = __('core::messages.update.success');
+        $this->selectedNodeId = $chart->id;
+        $this->reset('form');
+        $this->foundMobile = false;
+        $this->loadChart();
+        $this->showEmployeeModal = false;
+    }
+
+
     public function updateChartNode(ChartService $chartService, CompanyService $companyService)
     {
         $this->validate(StoreChartNodeRules::rules());
         $chart = $chartService->find($this->selectedNodeId);
         $chartService->update($chart, $this->form);
         $this->message = __('core::messages.update.success');
-        $this->charts = $companyService->getChart($this->company);
+        $this->loadChart();
         $this->selectedNodeTitle = $this->form['title'];
     }
 
@@ -86,7 +137,7 @@ class CompanyChart extends AdminDashboardBaseComponent
         $this->form['parent_id'] = $this->selectedNodeId;
         $chartService->create($this->form);
         $this->message = __('core::messages.update.success');
-        $this->charts = $companyService->getChart($this->company);
+        $this->loadChart();
         $this->closeNewNodeModal();
     }
     public function render()

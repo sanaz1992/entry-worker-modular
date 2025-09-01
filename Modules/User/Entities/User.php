@@ -71,9 +71,9 @@ class User extends Authenticatable
         return $this->medias()->where('collection', 'avatar')->first();
     }
 
-    public function charts(): BelongsToMany
-    {
-        return $this->belongsToMany(Chart::class, 'company_user')
-            ->withPivot('company_id')->withTimestamps();
-    }
+    // public function charts(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Chart::class, 'company_user')
+    //         ->withPivot('company_id')->withTimestamps();
+    // }
 }

@@ -18,7 +18,7 @@
                                     <tr>
                                         <th>{{__('user::attributes.avatar')}}</th>
                                         <th>{{__('user::attributes.name')}}</th>
-                                        <th>{{__('company::attributes.chart_title')}}</th>
+                                        {{-- <th>{{__('company::attributes.chart_title')}}</th> --}}
                                         <th>{{__('company::attributes.created_at')}}</th>
                                         <th>{{__('company::attributes.actions')}}</th>
                                     </tr>
@@ -29,14 +29,16 @@
                                                     src="{{ $user->avatar?->getThumbnailUrl('small') }}">
                                             </td>
                                             <td>{{$user->full_name}}</td>
-                                            <td>{{$user->charts->first()->title}}</td>
+                                            {{-- <td>
+                                                {{implode(' , ', $user->charts->pluck('title')->toArray())}}
+                                            </td> --}}
                                             <td>
-                                                {{verta($user->charts->first()->pivot->created_at)->format('Y/m/d H:i')}}
+                                                {{verta($user->pivot->created_at)->format('Y/m/d H:i')}}
                                             </td>
                                             <td>
                                                 <a href="#" class="btn btn-icon btn-danger"
                                                     wire:click="deleteEmployee({{$user->id}})"
-                                                     wire:confirm="آیا مطمئن هستید که می‌خواهید این کاربر را حذف کنید؟"
+                                                    wire:confirm="آیا مطمئن هستید که می‌خواهید این کاربر را حذف کنید؟"
                                                     title="@lang('company::attributes.employees_delete')">
                                                     <i class="fas fa-trash"></i>
                                                 </a>

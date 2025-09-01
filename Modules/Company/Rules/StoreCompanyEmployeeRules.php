@@ -10,7 +10,6 @@ class StoreCompanyEmployeeRules
             'form.mobile' => ['required', 'string', 'min:3', 'max:255'],
             'form.fname' =>  ['required', 'string', 'min:3', 'max:255'],
             'form.lname' =>  ['required', 'string', 'min:3', 'max:255'],
-            'form.chart_id' => ['required', 'numeric', 'exists:charts,id'],
         ];
     }
 }

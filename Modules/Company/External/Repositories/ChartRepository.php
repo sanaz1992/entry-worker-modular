@@ -22,6 +22,7 @@ class ChartRepository extends BaseRepository implements ChartRepositoryInterface
             'title'        => $data['title'],
             'company_id'        => $data['company_id'],
             'parent_id' => $data['parent_id'] ?? null,
+            'refrence_id' => $data['refrence_id'] ?? null,
         ]);
     }
 
@@ -31,5 +32,28 @@ class ChartRepository extends BaseRepository implements ChartRepositoryInterface
             'title' => $data['title'],
         ]);
         return $chart;
+    }
+    public function addUserToChart(int $chartId, int $userId): Chart
+    {
+        $chart = $this->find($chartId);
+        if ($chart->user_id) {
+            $chart = $this->copyAndDeleteChart($chart);
+        }
+        $chart->user_id = $userId;
+        $chart->save();
+        return $chart;
+    }
+    public function copyAndDeleteChart(Chart $chart): Chart
+    {
+        $newChart = $this->create([
+            'title' => $chart->title,
+            'company_id' => $chart->company_id,
+            'parent_id' => $chart->parent_id,
+            'refrence_id' => $chart->id
+        ]);
+
+        $chart->children()->update(['parent_id' => $newChart->id]);
+        $chart->delete();
+        return $newChart;
     }
 }
