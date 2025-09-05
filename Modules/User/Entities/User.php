@@ -68,7 +68,16 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        return $this->medias()->where('collection', 'avatar')->first();
+        $media = $this->medias()->where('collection', 'avatar')->first();
+        if ($media) {
+            return $media;
+        }
+        return new class() {
+            public function getThumbnailUrl($size = null)
+            {
+                return asset("img/no-image.jpeg");
+            }
+        };
     }
 
     // public function charts(): BelongsToMany
