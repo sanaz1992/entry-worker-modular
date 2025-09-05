@@ -35,7 +35,16 @@ class Company extends Model
     }
     public function getLogoAttribute()
     {
-        return $this->medias()->where('collection', 'logo')->first();
+        $media = $this->medias()->where('collection', 'logo')->first();
+        if ($media) {
+            return $media;
+        }
+        return new class () {
+            public function getThumbnailUrl($size = null)
+            {
+                return asset("img/no-image.jpeg");
+            }
+        };
     }
 
     public function manager(): BelongsTo
@@ -51,6 +60,6 @@ class Company extends Model
     public function employees(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'charts')
-            ->withPivot('parent_id','title')->withTimestamps();
+            ->withPivot('parent_id', 'title', 'deleted_at')->withTimestamps();
     }
 }
