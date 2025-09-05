@@ -7,16 +7,17 @@ use Modules\Company\Rules\StoreChartNodeRules;
 use Modules\Company\Rules\StoreCompanyEmployeeRules;
 use Modules\Company\Services\ChartService;
 use Modules\Company\Services\CompanyService;
+use Modules\Core\Traits\LivewireNotify;
 use Modules\Dashboard\Http\Livewire\Admin\AdminDashboardBaseComponent;
 use Modules\User\Services\UserService;
 
 class CompanyChart extends AdminDashboardBaseComponent
 {
+    use LivewireNotify;
     public $showOptions  = false;
     public $showEditModal = false;
     public $showNewNodeModal = false;
     public $showEmployeeModal = false;
-    public $message;
     public $company;
     public $charts;
     public $showOptionModal = false;
@@ -40,7 +41,13 @@ class CompanyChart extends AdminDashboardBaseComponent
         $this->charts = resolve(CompanyService::class)->getChart($this->company);
     }
 
-    protected $listeners = ['openNodeOptionModal', 'closeNodeOptionModal', 'closeEmployeeModal'];
+    protected $listeners = [
+        'openNodeOptionModal',
+        'closeNodeOptionModal',
+        'closeEmployeeModal',
+        'deleteEmployee',
+        'closeHistoryModal'
+    ];
     public function openNodeOptionModal($id, ChartService $chartService)
     {
         $this->selectedNodeId = $id;
@@ -89,6 +96,7 @@ class CompanyChart extends AdminDashboardBaseComponent
     {
         $this->showEmployeeModal = false;
     }
+
     public $foundMobile = false;
 
     public function updatedFormMobile($value, UserService $userService)
@@ -110,35 +118,71 @@ class CompanyChart extends AdminDashboardBaseComponent
     public function createNewUser(ChartService $chartService)
     {
         $this->validate(StoreCompanyEmployeeRules::rules());
-        $chart =  $chartService->addUserToChart($this->selectedNodeId, $this->form);
-        $this->message = __('core::messages.update.success');
-        $this->selectedNodeId = $chart->id;
-        $this->reset('form');
-        $this->foundMobile = false;
-        $this->loadChart();
-        $this->showEmployeeModal = false;
+        try {
+            $chart =  $chartService->addUserToChart($this->selectedNodeId, $this->form);
+            $this->notify('success', __('core::messages.update.success'));
+            $this->selectedNodeId = $chart->id;
+            $this->reset('form');
+            $this->foundMobile = false;
+            $this->loadChart();
+            $this->showEmployeeModal = false;
+        } catch (\Exception $e) {
+            $this->notify('error', __('core::messages.update.error'));
+        }
     }
 
+    public function deleteEmployee(ChartService $chartService)
+    {
+        try {
+            $chart =   $chartService->deleteEmployee($this->selectedNodeId);
+            $this->notify('success', __('core::messages.update.success'));
+            $this->selectedNodeId = $chart->id;
+            $this->loadChart();
+        } catch (\Exception $e) {
+            $this->notify('error', __('core::messages.update.error'));
+        }
+    }
 
     public function updateChartNode(ChartService $chartService, CompanyService $companyService)
     {
         $this->validate(StoreChartNodeRules::rules());
-        $chart = $chartService->find($this->selectedNodeId);
-        $chartService->update($chart, $this->form);
-        $this->message = __('core::messages.update.success');
-        $this->loadChart();
-        $this->selectedNodeTitle = $this->form['title'];
+        try {
+            $chart = $chartService->find($this->selectedNodeId);
+            $chartService->update($chart, $this->form);
+            $this->notify('success', __('core::messages.update.success'));
+            $this->loadChart();
+            $this->selectedNodeTitle = $this->form['title'];
+        } catch (\Exception $e) {
+            $this->notify('error', __('core::messages.update.error'));
+        }
     }
 
     public function createNewNode(ChartService $chartService, CompanyService $companyService)
     {
         $this->validate(StoreChartNodeRules::rules());
-        $this->form['company_id'] = $this->company->id;
-        $this->form['parent_id'] = $this->selectedNodeId;
-        $chartService->create($this->form);
-        $this->message = __('core::messages.update.success');
-        $this->loadChart();
-        $this->closeNewNodeModal();
+        try {
+            $this->form['company_id'] = $this->company->id;
+            $this->form['parent_id'] = $this->selectedNodeId;
+            $chartService->create($this->form);
+            $this->notify('success', __('core::messages.update.success'));
+            $this->loadChart();
+            $this->closeNewNodeModal();
+        } catch (\Exception $e) {
+            $this->notify('error', __('core::messages.update.error'));
+        }
+    }
+
+    public $refrence;
+    public $showHistory = false;
+    public function getChartHistory(ChartService $chartService)
+    {
+        $chart = $chartService->find($this->selectedNodeId);
+        $this->refrence = $chart->load('refrence');
+        $this->showHistory = true;
+    }
+    public function closeHistoryModal()
+    {
+        $this->showHistory = false;
     }
     public function render()
     {

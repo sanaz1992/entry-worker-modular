@@ -12,7 +12,8 @@ class ChartService
     public function __construct(
         protected ChartRepositoryInterface $chartRepository,
         protected UserService $userService
-    ) {}
+    ) {
+    }
 
     public function find(int $id): Chart
     {
@@ -43,5 +44,10 @@ class ChartService
         $data['user_id'] = $user->id;
         $chart = $this->chartRepository->addUserToChart($chartId, $user->id);
         return $chart;
+    }
+
+    public function deleteEmployee(int $chartId)
+    {
+        return $this->chartRepository->deleteUserFromChart($chartId);
     }
 }

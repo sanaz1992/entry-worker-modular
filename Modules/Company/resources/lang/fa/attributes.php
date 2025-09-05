@@ -21,7 +21,11 @@ return [
     'form.title' => 'عنوان',
     'chart_title' => 'سمت',
     'create_employee' => 'افزودن کارمند',
-    'employees_delete'=>'حذف کارمند'
+    'employees_delete' => 'حذف کارمند',
+    'change_employeer' => 'تغییر کارمند',
+    'employee_name' => 'نام کارمند',
+    'employee_started_at' => 'تاریخ شروع فعالیت',
+    'employee_ended_at' => 'تاریخ پایان فعالیت',
 
 
 ];

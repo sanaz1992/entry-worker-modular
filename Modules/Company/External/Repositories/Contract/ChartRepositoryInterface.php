@@ -11,5 +11,6 @@ interface ChartRepositoryInterface extends BaseRepositoryInterface
     public function create(array $data): Chart;
     public function update(Chart $chart, array $data): Chart;
     public function addUserToChart(int $chartId, int $userId): Chart;
+    public function deleteUserFromChart(int $chartId): Chart;
     public function copyAndDeleteChart(Chart $chart): Chart;
 }

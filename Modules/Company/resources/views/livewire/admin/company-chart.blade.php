@@ -1,36 +1,40 @@
-<section class="section">
-    <div class="section-body">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>
-                            چارت سازمانی {{ $company->title }}
-                        </h4>
-                    </div>
-                    <div class="card-body">
+<div>
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>
+                                چارت سازمانی {{ $company->title }}
+                            </h4>
+                        </div>
+                        <div class="card-body">
 
-                        <div class="tree">
-                            <ul>
-                                <li>
-                                    <a href="#" class="" onclick="onNodeClick(0)">
-                                        <span class="border-bottom">{{ $company->title }}</span>
-                                        <br>
-                                        <span>{{ $company->manager->full_name }}</span>
-                                    </a>
-                                    <ul>
-                                        @foreach ($charts as $chart)
-                                            <x-company::chart.chart-node :chart="$chart" />
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            </ul>
+                            <div class="tree">
+                                <ul>
+                                    <li>
+                                        <a href="#" class="" onclick="onNodeClick(0)">
+                                            <span class="border-bottom">{{ $company->title }}</span>
+                                            <br>
+                                            <span>{{ $company->manager->full_name }}</span>
+                                        </a>
+                                        <ul>
+                                            @foreach ($charts as $chart)
+                                                <x-company::chart.chart-node :chart="$chart" />
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
+    </section>
 
     @if($showOptionModal)
         <div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,.5)"
@@ -43,11 +47,45 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <button wire:click="addNode" class="btn btn-success mt-1">افزودن زیر شاخه</button>
                         @if ($selectedNodeId)
-                            <button wire:click="editNode" class="btn btn-primary">ویرایش</button>
-                            <button wire:click="editEmployee" class="btn btn-primary">ویرایش کارمند</button>
+                            <button wire:click="editNode" class="btn btn-primary mt-1">ویرایش</button>
+                            <button wire:click="editEmployee" class="btn btn-warning mt-1">ویرایش کارمند</button>
+                            <button onclick="confirmDeleteEmployee({{ $selectedNodeId }})" class="btn btn-danger mt-1">حذف
+                                کارمند</button>
+                            <button wire:click="getChartHistory" class="btn btn-info mt-1">تاریخچه تغییرات</button>
                         @endif
-                        <button wire:click="addNode" class="btn btn-success">افزودن زیر شاخه</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if($showHistory)
+        <div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,.5)"
+            onclick=" window.Livewire.dispatch('closeHistoryModal')">
+            <div class="modal-dialog modal-dialog-centered" onclick="event.stopPropagation()">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>تاریخچه تغییرات کارمند {{ $selectedNodeTitle }}</h5>
+                        <button type="button" class="far fa-window-close" wire:click="$set('showHistory', false)">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>{{__('company::attributes.employee_name')}}</th>
+                                        <th>{{__('company::attributes.employee_started_at')}}</th>
+                                        <th>{{__('company::attributes.employee_ended_at')}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @include('company::livewire.admin.partials.chart-refrence-tr', ['chart' => $refrence])
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,13 +163,13 @@
         </div>
     @endif
 
-     @if($showEmployeeModal)
+    @if($showEmployeeModal)
         <div class="modal fade show d-block" tabindex="-1" style="background: rgba(0,0,0,.5)"
             onclick=" window.Livewire.dispatch('closeEmployeeModal')">
             <div class="modal-dialog modal-dialog-centered" onclick="event.stopPropagation()">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5>افزودن کارمند </h5>
+                        <h5>@lang('company::attributes.change_employeer') </h5>
                         <button type="button" class="far fa-window-close" wire:click="$set('showEmployeeModal', false)">
                         </button>
                     </div>
@@ -175,8 +213,7 @@
             </div>
         </div>
     @endif
-</section>
-
+</div>
 @push('styles')
     <link rel="stylesheet" href="{{ asset('plugins/tree-family/tree.css') }}">
 @endpush
@@ -188,5 +225,23 @@
             console.log('nodeId', nodeId);
             window.Livewire.dispatch('openNodeOptionModal', { id: nodeId })
         }
+
+        function confirmDeleteEmployee(chartId) {
+            Swal.fire({
+                title: 'مطمئنی؟',
+                text: "این عملیات قابل بازگشت نیست!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'بله، حذف کن',
+                cancelButtonText: 'انصراف'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('deleteEmployee', { id: chartId })
+                }
+            });
+        }
+
     </script>
 @endpush

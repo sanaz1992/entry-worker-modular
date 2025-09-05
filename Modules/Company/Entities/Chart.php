@@ -20,6 +20,11 @@ class Chart extends Model
         return verta($this->created_at)->format('Y/m/d H:i');
     }
 
+    public function getDeletedAtJalaliAttribute()
+    {
+        return $this->deleted_at ? verta($this->deleted_at)->format('Y/m/d H:i') : 'تاکنون';
+    }
+
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Chart::class, 'parent_id');
@@ -27,6 +32,10 @@ class Chart extends Model
     public function children(): HasMany
     {
         return $this->hasMany(Chart::class, 'parent_id');
+    }
+    public function refrence(): BelongsTo
+    {
+        return $this->belongsTo(Chart::class, 'refrence_id')->withTrashed();
     }
 
     public function company(): BelongsTo

@@ -56,4 +56,15 @@ class ChartRepository extends BaseRepository implements ChartRepositoryInterface
         $chart->delete();
         return $newChart;
     }
+
+    public function deleteUserFromChart(int $chartId): Chart
+    {
+        $chart = $this->find($chartId);
+        if ($chart->user_id) {
+            $chart = $this->copyAndDeleteChart($chart);
+            $chart->user_id = null;
+            $chart->save();
+        }
+        return $chart;
+    }
 }

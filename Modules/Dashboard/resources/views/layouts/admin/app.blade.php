@@ -22,6 +22,24 @@
     ]) --}}
     <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/img/favicon.ico')}}' />
     @livewireStyles
+    <style>
+        .modal {
+            z-index: 2000;
+        }
+
+        .modal-backdrop {
+            z-index: 1999;
+        }
+
+        .swal-toast {
+            z-index: 999999 !important;
+        }
+
+        .modal-body {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+    </style>
     @stack('styles')
 </head>
 
@@ -53,12 +71,34 @@
     <script src="{{asset('assets/js/scripts.js')}}"></script>
     <!-- Custom JS File -->
     <script src="{{asset('assets/js/custom.js')}}"></script>
+
     {{-- @vite([
     'Modules/Dashboard/resources/assets/js/app.min.js',
     'Modules/Dashboard/resources/assets/js/scripts.js',
     'Modules/Dashboard/resources/assets/js/custom.js',
     ]) --}}
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+
+        Livewire.on('notify', (data) => {
+            Swal.fire({
+                toast: true,
+                position: 'bottom-start',
+                icon: data.type,
+                title: data.message,
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                customClass: {
+                    popup: 'swal-toast'
+                }
+            });
+        });
+
+    </script>
 
     @stack('scripts')
 
