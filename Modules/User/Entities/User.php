@@ -72,7 +72,7 @@ class User extends Authenticatable
         if ($media) {
             return $media;
         }
-        return new class() {
+        return new class () {
             public function getThumbnailUrl($size = null)
             {
                 return asset("img/no-image.jpeg");
