@@ -20,8 +20,8 @@
     "autoload": {
         "psr-4": {
             "Modules\\Media\\": "",
-            "Modules\\Media\\Database\\Factories\\": "database/factories/",
-            "Modules\\Media\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Media\\Database\\Factories\\": "Database/factories/",
+            "Modules\\Media\\Database\\Seeders\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {

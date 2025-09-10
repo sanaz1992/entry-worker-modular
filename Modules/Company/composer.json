@@ -7,19 +7,21 @@
             "email": "n.widart@gmail.com"
         }
     ],
+    "require": {
+        "nesbot/carbon": "*",
+        "morilog/jalali": "*"
+    },
     "extra": {
         "laravel": {
             "providers": [],
-            "aliases": {
-
-            }
+            "aliases": {}
         }
     },
     "autoload": {
         "psr-4": {
             "Modules\\Company\\": "app/",
-            "Modules\\Company\\Database\\Factories\\": "database/factories/",
-            "Modules\\Company\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Company\\Database\\Factories\\": "Database/factories/",
+            "Modules\\Company\\Database\\Seeders\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {

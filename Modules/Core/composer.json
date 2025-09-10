@@ -14,13 +14,13 @@
         }
     },
     "require": {
-        "hekmatinasser/verta": "*",
+        "hekmatinasser/verta": "*"
     },
     "autoload": {
         "psr-4": {
             "Modules\\Core\\": "",
-            "Modules\\Core\\Database\\Factories\\": "database/factories/",
-            "Modules\\Core\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Core\\Database\\Factories\\": "Database/factories/",
+            "Modules\\Core\\Database\\Seeders\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {

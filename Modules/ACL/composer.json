@@ -19,8 +19,8 @@
     "autoload": {
         "psr-4": {
             "Modules\\ACL\\": "",
-            "Modules\\ACL\\Database\\Factories\\": "database/factories/",
-            "Modules\\ACL\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\ACL\\Database\\Factories\\": "Database/factories/",
+            "Modules\\ACL\\Database\\Seeders\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {

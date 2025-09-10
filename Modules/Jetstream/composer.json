@@ -18,8 +18,8 @@
     "autoload": {
         "psr-4": {
             "Modules\\Jetstream\\": "",
-            "Modules\\Jetstream\\Database\\Factories\\": "database/factories/",
-            "Modules\\Jetstream\\Database\\Seeders\\": "database/seeders/"
+            "Modules\\Jetstream\\Database\\Factories\\": "Database/factories/",
+            "Modules\\Jetstream\\Database\\Seeders\\": "Database/Seeders/"
         }
     },
     "autoload-dev": {
