@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
-use Modules\Company\Http\Livewire\Admin\CompanyEmployees;
+use Modules\Company\Http\Livewire\Admin\Employees\CompanyEmployees;
 use Modules\Company\Http\Livewire\Admin\CompanyList;
+use Modules\Company\Http\Livewire\Admin\Employees\CompanyEmployeeCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayEdit;
@@ -22,7 +23,9 @@ Route::middleware(['auth', 'verified'])
         Route::get('/companies/create', CompanyCreate::class)->name('companies.create');
         Route::get('/companies/{company}/edit', CompanyEdit::class)->name('companies.edit');
         Route::get('/companies/{company}/chart', CompanyChart::class)->name('companies.chart');
+
         Route::get('/companies/{company}/employees', CompanyEmployees::class)->name('companies.employees.index');
+        Route::get('/companies/{company}/employees/create', CompanyEmployeeCreate::class)->name('companies.employees.create');
 
         Route::get('/companies/{company}/shifts', ShiftList::class)->name('companies.shifts.index');
         Route::get('/companies/{company}/shifts/create', ShiftCreate::class)->name('companies.shifts.create');

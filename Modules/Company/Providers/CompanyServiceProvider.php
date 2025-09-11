@@ -16,8 +16,9 @@ use Modules\Company\External\Repositories\ShiftRepository;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
-use Modules\Company\Http\Livewire\Admin\CompanyEmployees;
+use Modules\Company\Http\Livewire\Admin\Employees\CompanyEmployees;
 use Modules\Company\Http\Livewire\Admin\CompanyList;
+use Modules\Company\Http\Livewire\Admin\Employees\CompanyEmployeeCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayCreate;
 use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayEdit;
@@ -53,7 +54,9 @@ class CompanyServiceProvider extends ServiceProvider
         Livewire::component('company::create', CompanyCreate::class);
         Livewire::component('company::edit', CompanyEdit::class);
         Livewire::component('company::chart', CompanyChart::class);
-        Livewire::component('company::employees', CompanyEmployees::class);
+
+        Livewire::component('company::admin.employees', CompanyEmployees::class);
+        Livewire::component('company::admin.employee-create', CompanyEmployeeCreate::class);
 
         Livewire::component('company::admin.shifts.shift-create', ShiftCreate::class);
         Livewire::component('company::admin.shifts.shift-edit', ShiftEdit::class);

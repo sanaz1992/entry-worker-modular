@@ -31,13 +31,6 @@ return new class() extends Migration {
 
             $table->unique(['shift_id', 'date']);
         });
-
-        Schema::create('employee_shift', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('employee_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('shift_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -45,7 +38,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_shift');
         Schema::dropIfExists('shift_days');
         Schema::dropIfExists('shifts');
     }

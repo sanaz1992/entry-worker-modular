@@ -59,24 +59,29 @@ class CompanyService
     {
         $company->load(['charts' => function ($q) {
             $q->whereNull('parent_id');
-        }, 'charts.children']);
+        }, 'charts.children', 'charts.company_employees']);
         return $company->charts;
     }
 
-    public function getEmployees(Company $company, UserService $userService)
+
+    public function createEmployee(array $data)
     {
-        // $conditions = [
-        //     'where' => ['warehouse_id' => ['=', $this->warehouse->id]],
-        // ];
-        // return $userService->all(null, [], [], $conditions);
+        return DB::transaction(function () use ($data) {
+            $user = $this->userService->findByColumn('mobile', $data['mobile']);
+            if (!$user) {
+                $user = $this->userService->create($data);
+            }
+            $data['employee_id'] = $user->id;
+            $company = $this->companyRepository->find($data['company_id']);
+            $this->companyRepository->addEmployee($company, $data);
+        });
     }
 
-    public function createEmployee(Company $company, array $data)
-    {
-        }
 
-    public function deleteEmployee(Company $company, int $userId)
+    public function deleteEmployee(int $companyEmployeeId)
     {
-        $this->companyRepository->deleteEmployee($company, $userId);
+        $companyEmployee = $this->companyRepository->findCompanyEmployee($companyEmployeeId);
+        $company = $this->companyRepository->find($companyEmployee->company_id);
+        $this->companyRepository->deleteEmployee($company, $companyEmployee->employee_id,$companyEmployee->shift_id);
     }
 }

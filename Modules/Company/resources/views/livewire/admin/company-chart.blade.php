@@ -50,10 +50,10 @@
                         <button wire:click="addNode" class="btn btn-success mt-1">افزودن زیر شاخه</button>
                         @if ($selectedNodeId)
                             <button wire:click="editNode" class="btn btn-primary mt-1">ویرایش</button>
-                            <button wire:click="editEmployee" class="btn btn-warning mt-1">ویرایش کارمند</button>
-                            <button onclick="confirmDeleteEmployee({{ $selectedNodeId }})" class="btn btn-danger mt-1">حذف
-                                کارمند</button>
-                            <button wire:click="getChartHistory" class="btn btn-info mt-1">تاریخچه تغییرات</button>
+                            {{-- <button wire:click="editEmployee" class="btn btn-warning mt-1">ویرایش کارمند</button> --}}
+                            {{-- <button onclick="confirmDeleteEmployee({{ $selectedNodeId }})" class="btn btn-danger mt-1">حذف
+                                کارمند</button> --}}
+                            {{-- <button wire:click="getChartHistory" class="btn btn-info mt-1">تاریخچه تغییرات</button> --}}
                         @endif
                     </div>
                 </div>

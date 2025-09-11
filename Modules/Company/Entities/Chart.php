@@ -4,6 +4,7 @@ namespace Modules\Company\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\User\Entities\User;
@@ -13,7 +14,7 @@ use Modules\User\Entities\User;
 class Chart extends Model
 {
     use SoftDeletes;
-    protected $fillable = ['title', 'company_id', 'parent_id', 'user_id', 'refrence_id'];
+    protected $fillable = ['title', 'company_id', 'parent_id'];
 
     public function getCreatedAtJalaliAttribute()
     {
@@ -33,15 +34,17 @@ class Chart extends Model
     {
         return $this->hasMany(Chart::class, 'parent_id');
     }
-    public function refrence(): BelongsTo
-    {
-        return $this->belongsTo(Chart::class, 'refrence_id')->withTrashed();
-    }
 
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
+
+   public function company_employees(): HasMany
+    {
+        return $this->hasMany(CompanyEmployee::class);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

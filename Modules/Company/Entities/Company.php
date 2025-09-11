@@ -57,10 +57,18 @@ class Company extends Model
         return $this->hasMany(Chart::class);
     }
 
+    public function company_employees(): HasMany
+    {
+        return $this->hasMany(CompanyEmployee::class);
+    }
     public function employees(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'charts')
-            ->withPivot('parent_id', 'title', 'deleted_at')->withTimestamps();
+        return $this->belongsToMany(
+            User::class,
+            'company_employee',
+            'company_id',
+            'employee_id'
+        )->withPivot('shift_id', 'chart_id', 'user_id')->withTimestamps();
     }
 
     public function shifts(): HasMany

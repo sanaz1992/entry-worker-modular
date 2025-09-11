@@ -47,4 +47,8 @@ return [
     'work_time' => 'ساعت کاری',
     'break_time' => 'استراحت',
 
+    'employee' => 'کارمند',
+    'shift' => 'شیفت کاری',
+    'chart_node' => 'جایگاه در چارت',
+
 ];

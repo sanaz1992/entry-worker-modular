@@ -22,7 +22,6 @@ class ChartRepository extends BaseRepository implements ChartRepositoryInterface
             'title'        => $data['title'],
             'company_id'        => $data['company_id'],
             'parent_id' => $data['parent_id'] ?? null,
-            'refrence_id' => $data['refrence_id'] ?? null,
         ]);
     }
 
@@ -49,7 +48,6 @@ class ChartRepository extends BaseRepository implements ChartRepositoryInterface
             'title' => $chart->title,
             'company_id' => $chart->company_id,
             'parent_id' => $chart->parent_id,
-            'refrence_id' => $chart->id
         ]);
 
         $chart->children()->update(['parent_id' => $newChart->id]);
