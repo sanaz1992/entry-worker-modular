@@ -1,7 +1,7 @@
 <section class="section">
     <div class="section-body">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 ">
                 <div class="card">
                     <div class="card-header">
                         <h4>{{__('company::attributes.shift_days')}} {{$shift->title}} - {{$company->title}}</h4>
@@ -11,18 +11,19 @@
                                 <i class="fas fa-plus"></i>
                                 @lang('company::attributes.shift_day_create')
                             </a>
-                            {{-- <form>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="جستجو">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-primary"><i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form> --}}
                         </div>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body">
+                        <div class="row mb-2 ml-1">
+                            <button
+                                class="mx-1 btn {{$activeTab == "future_days" ? 'btn-primary' : ' btn-outline-primary'}}"
+                                wire:click="$set('activeTab', 'future_days')">روزهای
+                                اینده</button>
+                            <button
+                                class="mx-1 btn {{$activeTab == "past_days" ? 'btn-primary' : ' btn-outline-primary'}}"
+                                wire:click="$set('activeTab', 'past_days')">روزهای
+                                گذشته</button>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <tbody>
@@ -36,7 +37,6 @@
                                     </tr>
                                     @foreach ($shiftDays as $shiftDay)
                                         <tr>
-
                                             <td>{{$shiftDay->shift->title}}</td>
                                             <td>{{$shiftDay->date_jalali}}</td>
                                             <td>{{$shiftDay->start_time}} - {{$shiftDay->end_time}}</td>
@@ -53,6 +53,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $shiftDays->links() }}
                         </div>
                     </div>
                 </div>
