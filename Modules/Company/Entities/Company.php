@@ -39,7 +39,7 @@ class Company extends Model
         if ($media) {
             return $media;
         }
-        return new class () {
+        return new class() {
             public function getThumbnailUrl($size = null)
             {
                 return asset("img/no-image.jpeg");
@@ -61,5 +61,10 @@ class Company extends Model
     {
         return $this->belongsToMany(User::class, 'charts')
             ->withPivot('parent_id', 'title', 'deleted_at')->withTimestamps();
+    }
+
+    public function shifts(): HasMany
+    {
+        return $this->hasMany(Shift::class);
     }
 }

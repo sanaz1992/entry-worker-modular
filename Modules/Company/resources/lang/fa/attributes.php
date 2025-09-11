@@ -27,5 +27,24 @@ return [
     'employee_started_at' => 'تاریخ شروع فعالیت',
     'employee_ended_at' => 'تاریخ پایان فعالیت',
 
+    'shifts' => 'شیفت های کاری',
+    'shifts_create' => 'افزودن شیفت کاری',
+    'shifts_edit' => 'ویرایش شیفت کاری',
+    'working_hours_registration' => 'ثبت ساعت کاری',
+
+    'start_date' => 'از تاریخ',
+    'end_date' => 'تا تاریخ',
+    'start_time' => ' شروع ساعت کاری',
+    'end_time' => 'پایان ساعت کاری',
+    'break_start_time' => 'شروع زمان استراحت',
+    'break_end_time' => 'پایان زمان استراحت',
+    'night_shift' => 'شیفت شب',
+    'shift_days' => 'روزهای کاری',
+    'shift_day_create' => 'افزودن روز کاری',
+    'shift_day_edit' => 'ویرایش روز کاری',
+
+    'date' => 'تاریخ',
+    'work_time' => 'ساعت کاری',
+    'break_time' => 'استراحت',
 
 ];

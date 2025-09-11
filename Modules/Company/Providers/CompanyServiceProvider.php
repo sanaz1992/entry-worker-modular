@@ -9,11 +9,21 @@ use Modules\Company\External\Repositories\ChartRepository;
 use Modules\Company\External\Repositories\CompanyRepository;
 use Modules\Company\External\Repositories\Contract\ChartRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
+use Modules\Company\External\Repositories\Contract\ShiftDayRepositoryInterface;
+use Modules\Company\External\Repositories\Contract\ShiftRepositoryInterface;
+use Modules\Company\External\Repositories\ShiftDayRepository;
+use Modules\Company\External\Repositories\ShiftRepository;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
 use Modules\Company\Http\Livewire\Admin\CompanyEmployees;
 use Modules\Company\Http\Livewire\Admin\CompanyList;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftCreate;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayCreate;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayEdit;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftDayList;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftEdit;
+use Modules\Company\Http\Livewire\Admin\Shifts\ShiftList;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -44,6 +54,12 @@ class CompanyServiceProvider extends ServiceProvider
         Livewire::component('company::edit', CompanyEdit::class);
         Livewire::component('company::chart', CompanyChart::class);
         Livewire::component('company::employees', CompanyEmployees::class);
+
+        Livewire::component('company::admin.shifts.shift-create', ShiftCreate::class);
+        Livewire::component('company::admin.shifts.shift-edit', ShiftEdit::class);
+        Livewire::component('company::admin.shifts.shift-days-list', ShiftDayList::class);
+        Livewire::component('company::admin.shifts.shift-days-create', ShiftDayCreate::class);
+        Livewire::component('company::admin.shifts.shift-day-edit', ShiftDayEdit::class);
     }
 
     /**
@@ -56,6 +72,8 @@ class CompanyServiceProvider extends ServiceProvider
 
         $this->app->bind(CompanyRepositoryInterface::class, CompanyRepository::class);
         $this->app->bind(ChartRepositoryInterface::class, ChartRepository::class);
+        $this->app->bind(ShiftRepositoryInterface::class, ShiftRepository::class);
+        $this->app->bind(ShiftDayRepositoryInterface::class, ShiftDayRepository::class);
     }
 
     /**

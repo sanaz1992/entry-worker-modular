@@ -25,6 +25,6 @@ return [
     'user_updated_successfully' => 'کاربر با موفقیت ویرایش شد.',
     'select_one_item' => 'یک مورد را انتخاب کنید',
     'without_item' => 'هیچ آیتمی وجود ندارد',
-
+    'has_another_shift_day' => 'تاریخ مورد نظر برای این شیفت کاری قبلا ثبت شده است',
 
 ];

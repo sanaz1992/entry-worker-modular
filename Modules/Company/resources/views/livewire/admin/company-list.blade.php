@@ -62,6 +62,11 @@
                                                     title="@lang('company::attributes.company_employees')">
                                                     <i class="fas fa-users"></i>
                                                 </a>
+                                                <a href="{{route('admin.companies.shifts.index', $company)}}"
+                                                    class="btn btn-icon btn-light"
+                                                    title="@lang('company::attributes.shifts')">
+                                                    <i class="fas fa-bars"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

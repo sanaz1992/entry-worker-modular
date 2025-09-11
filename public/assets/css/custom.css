@@ -4,3 +4,7 @@
 .error {
     color: #ff3030 !important;
 }
+
+.navbar {
+    z-index: 1;
+}
