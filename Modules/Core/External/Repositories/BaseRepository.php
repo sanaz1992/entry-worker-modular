@@ -87,7 +87,12 @@ class BaseRepository implements BaseRepositoryInterface
             }
         }
         if ($orderBy) {
-            $query = $query->orderBy($orderBy, 'desc');
+            $orderBy = explode(':', $orderBy);
+            if (is_array($orderBy)) {
+                $query->orderBy($orderBy[0], $orderBy[1] ?? 'desc');
+            } else {
+                $query->orderBy($orderBy, 'desc');
+            }
         } else {
             $query = $query->latest();
         }
