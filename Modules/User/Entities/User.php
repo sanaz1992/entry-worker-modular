@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Modules\Company\Entities\Attendance;
 use Modules\Company\Entities\Chart;
 use Modules\Media\Entities\Media;
 use Modules\User\Database\Factories\UserFactory;
@@ -85,4 +86,9 @@ class User extends Authenticatable
     //     return $this->belongsToMany(Chart::class, 'company_user')
     //         ->withPivot('company_id')->withTimestamps();
     // }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'employee_id');
+    }
 }

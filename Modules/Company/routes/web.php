@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Company\Http\Livewire\Admin\Attendances\AttendanceCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
@@ -34,4 +35,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/companies/{company}/shifts/{shift}/days', ShiftDayList::class)->name('companies.shifts.days.index');
         Route::get('/companies/{company}/shifts/{shift}/days/create', ShiftDayCreate::class)->name('companies.shifts.days.create');
         Route::get('/companies/{company}/shifts/{shift}/days/{day}/edit', ShiftDayEdit::class)->name('companies.shifts.days.edit');
+
+        Route::get('/attendances/create', AttendanceCreate::class)->name('attendances.create');
+
     });

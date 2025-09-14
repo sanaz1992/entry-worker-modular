@@ -16,11 +16,16 @@ class CompanyService
         protected CompanyRepositoryInterface $companyRepository,
         protected MediaService $mediaService,
         protected UserService $userService
-    ) {}
+    ) {
+    }
 
     public function all(string $orderBy = null, array $limit = [], array $with = [], array $conditions = [])
     {
         return $this->companyRepository->all($orderBy, $limit, $with, $conditions);
+    }
+    public function find(int $id)
+    {
+        return $this->companyRepository->find($id);
     }
 
     public function create(array $data): Company
@@ -82,6 +87,6 @@ class CompanyService
     {
         $companyEmployee = $this->companyRepository->findCompanyEmployee($companyEmployeeId);
         $company = $this->companyRepository->find($companyEmployee->company_id);
-        $this->companyRepository->deleteEmployee($company, $companyEmployee->employee_id,$companyEmployee->shift_id);
+        $this->companyRepository->deleteEmployee($company, $companyEmployee->employee_id, $companyEmployee->shift_id);
     }
 }

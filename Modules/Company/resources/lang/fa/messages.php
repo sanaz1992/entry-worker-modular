@@ -30,5 +30,7 @@ return [
     'select_employee' => 'یک کارمند را انتخاب کنید',
     'select_shift' => 'یک شیفت کاری را انتخاب کنید',
     'select_chart_node' => 'یک جایگاه در چارت را انتخاب کنید',
+    'select_company' => 'یک شرکت را انتخاب کنید',
+    'this_attendance_has_contradiction' => 'این ساعت کاری برای این کارمند تناقض دارد',
 
 ];

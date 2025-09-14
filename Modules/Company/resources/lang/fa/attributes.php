@@ -47,8 +47,15 @@ return [
     'work_time' => 'ساعت کاری',
     'break_time' => 'استراحت',
 
+    'start_work' => 'شروع کار',
+    'end_work' => 'پایان کار',
+
     'employee' => 'کارمند',
     'shift' => 'شیفت کاری',
     'chart_node' => 'جایگاه در چارت',
+
+    'attendance_create' => 'ثبت ساعت کاری',
+    'company' => 'شرکت',
+    'description' => 'توضیحات',
 
 ];

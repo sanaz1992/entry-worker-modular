@@ -58,4 +58,9 @@ class ConvertDatesHelper
 
         return $dayOfWeek;
     }
+
+    public static function getPeriodOfTimeToMinutes($start, $end)
+    {
+        return 0;
+    }
 }

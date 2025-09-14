@@ -5,14 +5,17 @@ namespace Modules\Company\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
+use Modules\Company\External\Repositories\AttendanceRepository;
 use Modules\Company\External\Repositories\ChartRepository;
 use Modules\Company\External\Repositories\CompanyRepository;
+use Modules\Company\External\Repositories\Contract\AttendanceRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\ChartRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\CompanyRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\ShiftDayRepositoryInterface;
 use Modules\Company\External\Repositories\Contract\ShiftRepositoryInterface;
 use Modules\Company\External\Repositories\ShiftDayRepository;
 use Modules\Company\External\Repositories\ShiftRepository;
+use Modules\Company\Http\Livewire\Admin\Attendances\AttendanceCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyChart;
 use Modules\Company\Http\Livewire\Admin\CompanyCreate;
 use Modules\Company\Http\Livewire\Admin\CompanyEdit;
@@ -63,6 +66,8 @@ class CompanyServiceProvider extends ServiceProvider
         Livewire::component('company::admin.shifts.shift-days-list', ShiftDayList::class);
         Livewire::component('company::admin.shifts.shift-days-create', ShiftDayCreate::class);
         Livewire::component('company::admin.shifts.shift-day-edit', ShiftDayEdit::class);
+
+        Livewire::component('company::admin.attendances.attendance-create', AttendanceCreate::class);
     }
 
     /**
@@ -77,6 +82,7 @@ class CompanyServiceProvider extends ServiceProvider
         $this->app->bind(ChartRepositoryInterface::class, ChartRepository::class);
         $this->app->bind(ShiftRepositoryInterface::class, ShiftRepository::class);
         $this->app->bind(ShiftDayRepositoryInterface::class, ShiftDayRepository::class);
+        $this->app->bind(AttendanceRepositoryInterface::class, AttendanceRepository::class);
     }
 
     /**

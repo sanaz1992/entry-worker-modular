@@ -14,6 +14,12 @@
         </ul>
     </div>
     <ul class="navbar-nav navbar-right">
+        <li>
+            <a href="{{route('admin.attendances.create')}}" class="btn btn-success">
+                <i class="fa fa-plus"></i>
+                @lang('company::attributes.attendance_create')
+            </a>
+        </li>
         {{-- <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
                 <span class="badge headerBadge1">

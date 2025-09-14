@@ -66,7 +66,6 @@ class CompanyEmployeeCreate extends AdminDashboardBaseComponent
             $this->reset('form');
             $this->foundMobile = false;
         } catch (\Exception $e) {
-            dd($e->getMessage());
             $this->notify('error', __('core::messages.create.error'));
         }
     }
